@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Outlet, Link as LinkR } from "react-router-dom";
 
 const pages = [
-  { name: "Votare", link: "votare" },
+  { name: "Votare", link: "/" },
   { name: "Roata", link: "roata" },
 ];
 const Nav = () => {
@@ -76,16 +76,16 @@ const NavList = ({ ...props }) => {
       fontSize={{ xs: "22px", sm: "initial" }}
       {...props}
     >
-      {pages.map((page) => (
-        <LinkR to={page.link} style={{textDecoration: "none"}}>
+      {pages.map((p) => (
+        <LinkR to={p.link} key={p.link}style={{textDecoration: "none"}}>
           <Link
-            key={page.id}
+            key={p.id}
             sx={{
               color: { xs: "primary", sm: "white" },
               textDecoration: "none",
             }}
           >
-            {page.name}
+            {p.name}
           </Link>
         </LinkR>
       ))}

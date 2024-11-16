@@ -28,15 +28,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "votare",
-    element: (
-      <Layout>
-        <Votare />
-      </Layout>
-    ),
-  },
-  {
-    path: "roata",
+    path: "/roata",
     element: (
       <Layout>
         <Roata />

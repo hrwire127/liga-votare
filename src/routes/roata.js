@@ -43,6 +43,20 @@ JavaScript only required for spin interaction, not for rendering the component.
       );
 
       previousEndDegree = newEndDegree;
+
+      const normalizeAngle = (finalAngle) => {
+        return (360 - finalAngle + 90) % 360;
+      };
+
+      const segment = 360 / items;
+      const offset = 15;
+
+      animation.onfinish = () => {
+        const finalAngle = newEndDegree % 360;
+        const normalizedAngle = normalizeAngle(finalAngle);
+        const winner = Math.floor(((normalizedAngle + offset) % 360) / segment);
+        console.log(winner);
+      };
     });
   }
 
@@ -56,10 +70,12 @@ JavaScript only required for spin interaction, not for rendering the component.
       <fieldset className="ui-wheel-of-fortune" style={{ "--_items": items }}>
         <ul>
           {Persoane.map((item, index) => (
-              <li key={index}>{item.name}</li>
-            ))}
+            <li key={index}>{item.name}</li>
+          ))}
         </ul>
-        <button className="spin-btn" type="button">SPIN</button>
+        <button className="spin-btn" type="button">
+          SPIN
+        </button>
       </fieldset>
     </section>
   );

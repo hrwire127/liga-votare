@@ -5,7 +5,7 @@
   direction: ltr;
   display: grid;
   position: relative;
-  width: 70%;
+  width: 40%;
   &::after {
     aspect-ratio: 1 / cos(30deg);
     background-color: crimson;

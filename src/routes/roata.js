@@ -7,9 +7,7 @@ import Persoane from "../Persoane.json";
 export default function Roata() {
   const items = Persoane.length;
 
-  /*
-JavaScript only required for spin interaction, not for rendering the component.
-*/
+  console.log("AA")
 
   function wheelOfFortune(selector) {
     const node = document.querySelector(selector);

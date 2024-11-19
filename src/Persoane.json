@@ -28,5 +28,35 @@
         "name": "Fatima",
         "description": "Description of the card.6",
         "votes": 60
+    },
+    {
+        "name": "Ali",
+        "description": "Description of the card.1",
+        "votes": 120
+    },
+    {
+        "name": "Beatriz",
+        "description": "Description of the card.2",
+        "votes": 40
+    },
+    {
+        "name": "Charles",
+        "description": "Description of the card.3",
+        "votes": 60
+    },
+    {
+        "name": "Diya",
+        "description": "Description of the card.4",
+        "votes": 80
+    },
+    {
+        "name": "Eric",
+        "description": "Description of the card.5",
+        "votes": 20
+    },
+    {
+        "name": "Fatima",
+        "description": "Description of the card.6",
+        "votes": 60
     }
 ]

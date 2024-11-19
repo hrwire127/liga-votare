@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Card, CardContent } from "@mui/material";
 import { CardOverflow, Button } from "@mui/joy";
 import "../css/Persoana.css";
@@ -6,6 +6,7 @@ import ModalPersoana from "./ModalPersoana";
 
 function Persoana(props) {
   const { name, description, votes } = props;
+  const [open, setOpen] = useState(false);
   return (
     <Card variant="soft" className="h-card">
       <Box className="c-container">
@@ -24,9 +25,9 @@ function Persoana(props) {
       </Box>
       <CardContent className="card-text">
         <Typography level="title-md">{votes} voturi</Typography>
-        <Button variant="solid">Voteaza</Button>
+        <Button variant="solid" onClick={() => setOpen(!open)}>Voteaza</Button>
       </CardContent>
-      <ModalPersoana />
+      <ModalPersoana open={open} setOpen={setOpen} />
     </Card>
   );
 }

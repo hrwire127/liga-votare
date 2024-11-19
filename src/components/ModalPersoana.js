@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import Persoane from "../Persoane.json";
 import "../css/ModalPersoana.css";
+import { Form } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -31,6 +32,13 @@ function ModalPersoana(props) {
   //   const Winner = Persoane[props.winner]
   const Winner = Persoane[1];
 
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("AAA")
+  }
+
   return (
     <MuiModal
       open={open}
@@ -39,7 +47,7 @@ function ModalPersoana(props) {
       aria-describedby="modal-modal-description"
     >
       <Card sx={style}>
-        <CardHeader title="Avem un castigator" />
+        <CardHeader title={`Voteaza pentru ${Winner.name}`} />
         {/* <Typography
           className="modal-title"
           gutterBottom
@@ -48,21 +56,31 @@ function ModalPersoana(props) {
         >
           Avem un castigator
         </Typography> */}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Votezi pentru {Winner.name}
-          </Typography>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button onClick={() => setOpen(false)} variant="contained">
-            EXIT
-          </Button>
-        </CardActions>
+        <Form onSubmit={onSubmit}>
+          <CardContent>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              Introdu nr tău de telefon pentru a continua
+            </Typography>
+            <TextField
+              style={{marginTop: 16}}
+              {...props}
+              // inputRef={ref}
+              fullWidth
+              size="small"
+              label="Număr de Telefon"
+              variant="outlined"
+              name="phone"
+            />
+          </CardContent>
+          <CardActions style={{ padding: 14 }}>
+            <Button onClick={() => setOpen(false)} variant="outlined">
+              EXIT
+            </Button>
+            <Button type="submit" variant="contained">
+              Trimite SMS
+            </Button>
+          </CardActions>
+        </Form>
       </Card>
       {/* <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">

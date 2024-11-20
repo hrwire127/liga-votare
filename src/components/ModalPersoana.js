@@ -32,12 +32,11 @@ function ModalPersoana(props) {
   //   const Winner = Persoane[props.winner]
   const Winner = Persoane[1];
 
-
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log("AAA")
-  }
+    console.log("AAA");
+  };
 
   return (
     <MuiModal
@@ -48,28 +47,22 @@ function ModalPersoana(props) {
     >
       <Card sx={style}>
         <CardHeader title={`Voteaza pentru ${Winner.name}`} />
-        {/* <Typography
-          className="modal-title"
-          gutterBottom
-          variant="h5"
-          component="div"
-        >
-          Avem un castigator
-        </Typography> */}
         <Form onSubmit={onSubmit}>
           <CardContent>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
               Introdu nr tău de telefon pentru a continua
             </Typography>
             <TextField
-              style={{marginTop: 16}}
+              style={{ marginTop: 16 }}
               {...props}
               // inputRef={ref}
               fullWidth
               size="small"
               label="Număr de Telefon"
               variant="outlined"
+              type="number"
               name="phone"
+              required
             />
           </CardContent>
           <CardActions style={{ padding: 14 }}>
@@ -82,15 +75,6 @@ function ModalPersoana(props) {
           </CardActions>
         </Form>
       </Card>
-      {/* <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Castigatorul este {Winner.name} cu {Winner.votes} voturi
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {Winner.description}
-        </Typography>
-        <Button onClick={() => setOpen(false)}>Close</Button>
-      </Box> */}
     </MuiModal>
   );
 }

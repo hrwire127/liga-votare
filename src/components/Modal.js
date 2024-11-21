@@ -26,8 +26,7 @@ const style = {
 };
 
 function Modal(props) {
-  const { open, setOpen } = props; //aa
-  const Winner = Persoane[props.winner];
+  const { open, setOpen, winner } = props; //aa
   //   const Winner = Persoane[1];
 
   return (
@@ -49,10 +48,10 @@ function Modal(props) {
         </Typography> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {Winner && Winner.name}
+            {winner && winner.name}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {Winner && Winner.description}
+            {winner && winner.description}
           </Typography>
         </CardContent>
         <CardActions>
@@ -61,15 +60,6 @@ function Modal(props) {
           </Button>
         </CardActions>
       </Card>
-      {/* <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Castigatorul este {Winner.name} cu {Winner.votes} voturi
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {Winner.description}
-        </Typography>
-        <Button onClick={() => setOpen(false)}>Close</Button>
-      </Box> */}
     </MuiModal>
   );
 }

@@ -106,7 +106,7 @@ const FortuneWheel = ({ data }) => {
                   dominantBaseline="middle"
                   x={textX}
                   y={textY}
-                  transform={`rotate(${rotationAngle} ${textX} ${textY})`}
+                  transform={`rotate(${rotationAngle + 90} ${textX} ${textY})`}
                 >
                   {name}
                 </text>

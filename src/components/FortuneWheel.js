@@ -23,13 +23,18 @@ const FortuneWheel = ({ data }) => {
     if (isSpinning) return;
 
     setIsSpinning(true);
-    const randomSpins = Math.floor(Math.random() * 3) + 5; // Random spins (5-7 full)
-    const randomOffset = Math.random() * 360; // Random final angle
+
+    // Randomize spin with 5-7 full rotations plus a random offset
+    const randomSpins = Math.floor(Math.random() * 3) + 5;
+    const randomOffset = Math.random() * 360;
     const targetRotation = randomSpins * 360 + randomOffset;
 
     const newRotation = currentRotation + targetRotation;
 
+    // Calculate normalized angle in [0, 360)
     const normalizedAngle = ((newRotation % 360) + 360) % 360;
+
+    // Find the winner slice
     const selectedSlice = slices.find(
       ({ startAngle, sliceAngle }) =>
         normalizedAngle >= startAngle &&
@@ -38,7 +43,8 @@ const FortuneWheel = ({ data }) => {
 
     setCurrentRotation(newRotation);
     setTimeout(() => {
-      setResult(selectedSlice);
+      let person = slices[selectedSlice.id + 3];
+      setResult(person);
       setIsSpinning(false);
       setOpenModal(true);
     }, 4500);
@@ -48,7 +54,6 @@ const FortuneWheel = ({ data }) => {
     <section className="section-wheel">
       <div className="wheel-container">
         <div className="pointer"></div>
-
         <svg
           className="wheel"
           viewBox="0 0 200 200"
@@ -58,43 +63,50 @@ const FortuneWheel = ({ data }) => {
           }}
         >
           {slices.map(({ name, startAngle, sliceAngle }, index) => {
-            const endAngle = startAngle + sliceAngle;
-            const largeArc = sliceAngle > 180 ? 1 : 0;
+            // Midpoint of the slice (center of the text)
+            const middleAngle = startAngle + sliceAngle / 2;
 
+            // Calculate position of the text on the circle (fixed radius of 85px)
+            const textRadius = 85;
+            const textX =
+              100 + textRadius * Math.cos((middleAngle * Math.PI) / 180);
+            const textY =
+              100 - textRadius * Math.sin((middleAngle * Math.PI) / 180);
+
+            // Calculate the angle for the line from the center of the wheel to the center of the text
+            const angle =
+              Math.atan2(textY - 100, textX - 100) * (180 / Math.PI); // Convert from radians to degrees
+
+            // Text rotation angle should be the same as the calculated angle, to align it with the line
+            const rotationAngle = angle + 90; // Adjust to make text perpendicular to the line
+
+            // Path for slice (draw each slice)
             const x1 = 100 + 100 * Math.cos((startAngle * Math.PI) / 180);
             const y1 = 100 - 100 * Math.sin((startAngle * Math.PI) / 180);
-
-            const x2 = 100 + 100 * Math.cos((endAngle * Math.PI) / 180);
-            const y2 = 100 - 100 * Math.sin((endAngle * Math.PI) / 180);
-
-            const textAngle = startAngle + sliceAngle / 2; // Middle angle of the slice
-            const textRadius = 70; // Position text closer to the center
-            const textX =
-              100 + textRadius * Math.cos((textAngle * Math.PI) / 180);
-            const textY =
-              100 - textRadius * Math.sin((textAngle * Math.PI) / 180);
-
-            // Define path for slice
-            const pathId = `slicePath-${index}`;
+            const x2 =
+              100 + 100 * Math.cos(((startAngle + sliceAngle) * Math.PI) / 180);
+            const y2 =
+              100 - 100 * Math.sin(((startAngle + sliceAngle) * Math.PI) / 180);
+            const largeArc = sliceAngle > 180 ? 1 : 0;
 
             return (
               <g key={index}>
-                {/* Draw slice */}
+                {/* Slice */}
                 <path
-                  id={pathId}
                   d={`M 100 100 L ${x1} ${y1} A 100 100 0 ${largeArc} 0 ${x2} ${y2} Z`}
                   fill={`hsl(${(index * 360) / slices.length}, 80%, 60%)`}
                 />
-                {/* Draw text */}
+
+                {/* Text */}
                 <text
                   fill="white"
                   fontSize="4"
                   fontWeight="bold"
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  transform={`rotate(${textAngle - 90} ${textX} ${textY})`} // Rotate text toward the center
                   x={textX}
                   y={textY}
+                  transform={`rotate(${rotationAngle} ${textX} ${textY})`}
                 >
                   {name}
                 </text>

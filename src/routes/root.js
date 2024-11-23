@@ -6,7 +6,7 @@ import Persoane from "../Persoane.json";
 
 function Root() {
   return (
-    <section style={{ marginTop: "1800px" }}>
+    <section className="hero-margin">
       <Typography variant="h3" className="title" gutterBottom>
         Voteaza Persoana ta Preferata
       </Typography>

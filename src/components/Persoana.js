@@ -10,7 +10,7 @@ function Persoana(props) {
   return (
     <Card variant="soft" className="h-card">
       <Box className="c-container">
-        <CardOverflow>
+        <CardOverflow className="card-img">
           <img
             src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
             srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
@@ -25,7 +25,9 @@ function Persoana(props) {
       </Box>
       <CardContent className="card-text">
         <Typography level="title-md">{votes} voturi</Typography>
-        <Button variant="solid" onClick={() => setOpen(!open)}>Voteaza</Button>
+        <Button variant="solid" onClick={() => setOpen(!open)}>
+          Voteaza
+        </Button>
       </CardContent>
       <ModalPersoana open={open} setOpen={setOpen} />
     </Card>

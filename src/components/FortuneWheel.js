@@ -12,10 +12,13 @@ const FortuneWheel = ({ data }) => {
 
   // Calculate slices with proportional angles
   let angleStart = 0;
+
   const slices = data.map((item) => {
     const sliceAngle = (item.votes / totalVotes) * 360;
     const startAngle = angleStart;
     angleStart += sliceAngle;
+    console.log(item.name)
+    console.log(angleStart)
     return { ...item, sliceAngle, startAngle };
   });
 
@@ -28,6 +31,8 @@ const FortuneWheel = ({ data }) => {
     const randomSpins = Math.floor(Math.random() * 3) + 5;
     const randomOffset = Math.random() * 360;
     const targetRotation = randomSpins * 360 + randomOffset;
+
+    console.log(targetRotation)
 
     const newRotation = currentRotation + targetRotation;
 
@@ -43,8 +48,8 @@ const FortuneWheel = ({ data }) => {
 
     setCurrentRotation(newRotation);
     setTimeout(() => {
-      let person = slices[selectedSlice.id + 3];
-      setResult(person);
+      // let person = slices[selectedSlice.id + 2];
+      setResult(selectedSlice);
       setIsSpinning(false);
       setOpenModal(true);
     }, 4500);
